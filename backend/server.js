@@ -6,7 +6,13 @@ dotenv.config();
 
 const app = express();
 
-app.get("/", (req, res) => {});
+app.post("/products", async (req, res) => {
+  const products = req.body; // Placeholder for fetching products from the database
+  res.json(products);
+  if (!products.name || !products.price || !products.imageUrl) {
+    res.status(400).json({ message: "Missing required product fields" });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 

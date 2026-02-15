@@ -12,6 +12,14 @@ app.post("/products", async (req, res) => {
   if (!products.name || !products.price || !products.imageUrl) {
     res.status(400).json({ message: "Missing required product fields" });
   }
+  const newproduct = new Product(product);
+  try {
+    await newproduct.save();
+    res.status(201).json(newproduct);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.error("Error saving product:", error.message);
+  }
 });
 
 const PORT = process.env.PORT || 5000;

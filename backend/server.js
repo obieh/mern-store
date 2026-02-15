@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import Product from "./models/product.model.js";
@@ -7,10 +8,12 @@ dotenv.config();
 
 const app = express();
 
+const upload = multer();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/api/product", async (req, res) => {
+app.post("/api/product", upload.none(), async (req, res) => {
   const product = req.body; // Placeholder for fetching products from the database
 
   if (!product || !product.name || !product.price || !product.imageUrl) {

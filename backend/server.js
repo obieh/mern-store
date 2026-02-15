@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = express();
 
-app.post("/products", async (req, res) => {
+app.post("/api/products", async (req, res) => {
   const products = req.body; // Placeholder for fetching products from the database
   res.json(products);
   if (!products.name || !products.price || !products.imageUrl) {
